@@ -1,0 +1,74 @@
+<button (click)="showDialog = !showDialog" class="btn btn-dark mt-2"> Add User </button>
+
+<div class="card card-body mb-2 mt-2" *ngIf="!showDialog">
+  <h2>Add User</h2>
+  <form (submit)="onSubmit($event)">
+    <div class="form-group mb-2">
+        <label for="">First Name</label>
+        <input type="text" class="form-control" [(ngModel)]="user.firstName" name="firstName">
+        {{user.firstName}}
+      </div>
+      <div class="form-group mb-2">
+        <label for="">Last Name</label>
+        <input type="text" class="form-control" [(ngModel)]="user.lastName"name="lastName">
+      </div>
+      <div class="form-group mb-2">
+        <label for="">Age</label>
+        <input type="text" class="form-control" [(ngModel)]="user.age"name="age">
+      </div>
+      <div class="form-group mb-2">
+        <label for="">Street</label>
+        <input type="text" class="form-control" [(ngModel)]="user.address.street"name="street">
+        {{user.address.street}}
+      </div>
+      <div class="form-group mb-2">
+        <label for="">City</label>
+        <input type="text" class="form-control" [(ngModel)]="user.address.city"name="city">
+        {{user.address.city}}
+      </div>
+      <div class="form-group mb-2">
+        <label for="">State</label>
+        <input type="text" class="form-control" [(ngModel)]="user.address.state"name="state">
+        {{user.address.state}}
+      </div>
+
+
+        <!-- <button (click)="addUser(user)" [disabled]="!enableAdd" class="btn mb-2 bg-light w-100">Add New User</button> -->
+        <button (click)="addUser()" [disabled]="user.firstName == '' || user.lastName == ''" class="btn mb-2 bg-light w-100">Add New User</button>
+
+  </form>
+
+</div>
+
+  <div class="d-grid col-6 mx-auto">
+  <!-- <button [disabled]="!enableAdd" class="btn mb-2" [ngClass]="currentClasses" type="button">Add New User</button> -->
+  <!-- <button (click)="addUser({firstName:'Neil',lastName:'Mukesh',isActive:true ,registered:'01/02/0'})" [disabled]="!enableAdd" class="btn mb-2 bg-light" type="button">Add New User</button> -->
+  </div>
+    <ul class="list-unstyled" *ngIf="loadingUsers && users.length > 0">
+
+            <!-- <li class="card card-body mb-2" *ngFor="let user of users" [class.bg-light]="user.isActive" [style.border-color]="user.isActive? 'green':'red'"> -->
+              <li class="card card-body mb-2 mt-2" *ngFor="let user of users" [class.bg-light]="user.isActive">
+              <!-- <div class="row">
+                <div class="col-sm-4">
+                  <img *ngIf="user.image" class="img-fluid" [src]="user.image" alt="" style="width: 10rem;height: 10rem;">
+                </div> -->
+                <div class="col-sm-6">
+                  <!-- <h3 [ngStyle]="currentStyle">{{user.firstName}} {{user.lastName}}</h3> -->
+                  <h3>{{user.firstName}} {{user.lastName}}<small *ngIf="user.age && user.address"><button (click)="toggleButton(user)" class="btn btn-dark btn-sm">
+                    <i [ngClass]="user.hide?'fa fa-plus':'fa fa-minus'"></i>
+                  </button></small></h3>
+                  <!-- <ul class="list-group" *ngIf="user.age && user.address && showExtended" > -->
+                    <ul class="list-group" *ngIf="user.age && user.address && !user.hide" >
+                    <!-- {{user.isActive}} -->
+                    <li class="list-group-item"> Age: {{user.age}}</li>
+                    <li class="list-group-item"> Address : {{user?.address?.street}}</li>
+                    <!-- <li class="list-group-item"> Address : {{user.balance | currency:"GBP":"symbol"}}</li> -->
+                    <li class="list-group-item"> Registered : {{user.registered | date:"mm/dd/YYYY"}}</li>
+                  </ul>
+                </div>
+              <!-- </div> -->
+            </li>
+    </ul>
+
+    <h4 *ngIf="!loadingUsers"> Loading User....</h4>
+    <h4 *ngIf="loadingUsers && users.length === 0"> No Loads Found ...</h4>
