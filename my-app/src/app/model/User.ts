@@ -7,8 +7,7 @@ export interface addd{
 export interface User{
    firstName: string,
       lastName: string,
-      age?:number,
-      address?:addd,
+      email:string,
       isActive?:boolean,
       hide?:boolean,
       registered?:Date
