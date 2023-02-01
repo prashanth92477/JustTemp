@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component,OnInit,ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { User } from '../../model/User';
 
@@ -28,15 +28,11 @@ import { User } from '../../model/User';
 })
 export class UsersComponent implements OnInit{
 users: User[]=[];
+@ViewChild('userForm') form:any;
 user:any={
   firstName:'',
   lastName:'',
-  age:0,
-  address:{
-    street: '',
-    city:'',
-    state:''
-  }
+  email:''
 }
 // user:myUser={
 //   firstName:'',
@@ -60,9 +56,6 @@ user:any={
   isActive:boolean=true;
   showDialog:boolean=true;
 
-  address:any=this.user.address?.street
-  addresscity:any=this.user.address?.city
-  addressstate:any=this.user.address?.state
   // currentClasses={};
   // currentStyle={}
   constructor(){
@@ -74,12 +67,7 @@ user:any={
         this.users = [{
       firstName: 'John',
       lastName: 'Doe',
-      age:30,
-      address:{
-        street: '60 Steven st',
-        city:'Tampa',
-        state:'FLorida'
-      },
+      email:"abc@gmail.com",
       // balance:100,
       registered:new Date('01/01/2018 08:30:00'),
       isActive:true,
@@ -93,12 +81,7 @@ user:any={
     {
       firstName: 'Steve',
       lastName: 'Job',
-      age:60,
-      address:{
-        street: '60 Steven st',
-        city:'Tampa',
-        state:'FLorida'
-      },
+      email:"def@gmail.com",
       // image:'https://www.freepik.com/free-vector/light-bulb-gears-cogs_10603271.htm#query=innovation&position=4&from_view=keyword'
       // image:"assets/buldjpg.jpg",
       isActive:false,
@@ -109,12 +92,7 @@ user:any={
     {
       firstName: 'Mark',
       lastName: 'Bouncer',
-      age:30,
-      address:{
-        street: '100 columbus st',
-        city:'columbus',
-        state:'ohio'
-      },
+      email:"ghi@gmail.com",
       // image:"assets/42744.jpg",
       isActive:true,
       // balance:200,
@@ -133,22 +111,22 @@ user:any={
     // this.setCurrentClassess();
     // this.setCurrentStyle();
   }
-  addUser(){
-    this.user.isActive = true;
-    this.user.registered = new Date();
+//   addUser(){
+//     this.user.isActive = true;
+//     this.user.registered = new Date();
 
-      this.users.unshift(this.user);
-      this.user={
-  firstName: '',
-      lastName: '',
-      age:0,
-      address:{
-        street: '',
-        city:'',
-        state:''
-      },
-}
-  }
+//       this.users.unshift(this.user);
+//       this.user={
+//   firstName: '',
+//       lastName: '',
+//       age:0,
+//       address:{
+//         street: '',
+//         city:'',
+//         state:''
+//       },
+// }
+//   }
   // setCurrentClassess(){
   //   this.currentClasses={
   //     'btn-success' : this.enableAdd,
@@ -172,8 +150,15 @@ user:any={
 //     console.log(e.target)
 //     console.log(e.target.value);
 // }
-onSubmit(e:any){
-  e.preventDefault();
-  console.log(123)
+onSubmit({value,valid}: {value: User,valid: unknown}){
+  if(!valid === true){
+    console.log('Form is in-valid');
+}else{
+  value.isActive=true;
+  value.registered=new Date();
+  value.hide=true;
+  this.users.unshift(value);
+  this.form.reset();
+}
 }
 }
