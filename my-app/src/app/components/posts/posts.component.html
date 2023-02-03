@@ -1,0 +1,33 @@
+<p>posts works!</p>
+<!-- <nav aria-label="...">
+  <ul class="pagination">
+    <li class="page-item disabled">
+      <span class="page-link">Previous</span>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item active">
+      <span class="page-link">
+        2
+        <span class="sr-only">(current)</span>
+      </span>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#">Next</a>
+    </li>
+  </ul>
+</nav> -->
+<app-post-form [isEdit]="isEdit" [currentPost]="currentPost" (updatingPost)="onUpdatePost($event)" (newPost)="onNewPost($event)"></app-post-form>
+<!-- <div class="card" *ngFor="let post of posts.slice(0,5)"> -->
+  <div class="card" *ngFor="let post of posts">
+    <div class="card-body">
+      <h3>{{post.title}}</h3>
+      <p>{{post.body}}</p>
+    </div>
+    <hr>
+    <div>
+      <button class="btn btn-danger"><i class="bi bi-x-lg"></i></button>
+      <button (click)="editPost(post)" class="btn btn-dark"><i class="bi bi-pencil-square"></i></button>
+    </div>
+
+</div>
