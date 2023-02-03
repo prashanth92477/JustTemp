@@ -1,0 +1,19 @@
+<p>post-form works!</p>
+<form>
+    <div class="form-group mb-2">
+        <label for="">Title</label>
+        <input type="text" class="form-control" name="text" [(ngModel)]="currentPost.title"   #title>
+               <!-- {{title.value | json}} -->
+      </div>
+        <div class="form-group mb-2">
+        <label for="">Body</label>
+        <input type="text" class="form-control" name="body" [(ngModel)]="currentPost.body"  #body>
+               {{body.value}}
+      </div>
+      <div class="form-group mb-2">
+        <input type="hidden" class="form-control" name="id" [(ngModel)]="currentPost.id"  #id>
+               <!-- {{body.value}} -->
+      </div>
+      <button *ngIf="!isEdit" (click)="addPost(title.value,body.value)"class="btn btn-primary">Save Post</button>
+      <button *ngIf="isEdit" (click)="updatedPost(currentPost)"class="btn btn-warning">UpdatePost</button>
+  </form>
