@@ -16,6 +16,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { UsersComponent } from './components/users/users.component';
 import { PostsComponent } from './components/posts/posts.component';
 import { PostFormComponent } from './components/post-form/post-form.component';
+import { LogsComponent } from './components/logs/logs.component';
+import { LogFormComponent } from './components/log-form/log-form.component';
+import { LogsService } from './services/logs.service';
 
 
 @NgModule({
@@ -25,7 +28,9 @@ import { PostFormComponent } from './components/post-form/post-form.component';
     NavbarComponent,
     UsersComponent,
     PostsComponent,
-    PostFormComponent
+    PostFormComponent,
+    LogsComponent,
+    LogFormComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +41,7 @@ import { PostFormComponent } from './components/post-form/post-form.component';
     FontAwesomeModule
 
   ],
-  providers: [DataService,PostService],
+  providers: [DataService,PostService,LogsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
