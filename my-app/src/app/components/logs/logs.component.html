@@ -1,8 +1,9 @@
-<ul class="list-group">
-  <li *ngFor="let log of logs" class="list-group-item d-flex  justify-content-between">
-    <a href="">{{log.text}}</a>
+<ul class="list-group" *ngIf="loaded && logs.length > 0">
+  <li *ngFor="let log of logs" [class.list-group-item-secondary]="selectedLog === log"
+    class="list-group-item d-flex  justify-content-between">
+    <a (click)="onSelect(log)" href="#">{{log.text}}</a>
     <span class="log-date">{{log.date | date:'short'}}</span>
-    <i class="bi bi-trash"></i>
+    <i (click)="onDelete(log)"class="bi bi-trash"></i>
   </li>
   <!-- <li class="list-group-item d-flex  justify-content-between">
     <a href="">Added Login</a>
@@ -10,3 +11,11 @@
     <i class="bi bi-trash"></i>
   </li> -->
 </ul>
+
+<div *ngIf="loaded && logs.length == 0">
+  <h2>No loads</h2>
+</div>
+<div *ngIf="!loaded">
+  <h2>LOADING .....</h2>
+</div>
+
